@@ -16,6 +16,10 @@ class User extends Authenticatable
 
     protected $table = 'dbo.Dipendenti';
 
+    protected $primaryKey = 'pdv_riferimento';
+
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *

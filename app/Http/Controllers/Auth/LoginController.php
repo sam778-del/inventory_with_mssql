@@ -55,17 +55,13 @@ class LoginController extends Controller
 
     public function authLogin(LoginRequest $request)
     {
-        $request->authenticate();
-
         $password = $request->has('password') ? $request->password : '';
-        $user = User::where('password', $password)->first();
-        return $user;
-        // if ($user = User::where('password', $password)->first()) {
-        //     Auth::login($user);
-        //     return redirect()->intended('/');
-        // }else{
-        //     return redirect()->back()->with('error', __('Credentials Doesn\'t Match !'));
-        // }
+        if ($user = User::where('password_operatore', $password)->first()) {
+            Auth::login($user);
+            return redirect()->intended('/');
+        }else{
+            return redirect()->back()->with('error', __('Credentials Doesn\'t Match !'));
+        }
     }
 
     public function authLogout(Request $request)
