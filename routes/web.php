@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,10 @@ use App\Models\User;
 |
 */
 
+
 require __DIR__ . '/auth.php';
 Route::get('/check/connection', function() {
-    return User::all();
+    return User::limit(10)->get();
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["auth"]);

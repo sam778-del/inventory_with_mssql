@@ -24,7 +24,8 @@ class User extends Authenticatable
     protected $fillable = [
         'cf',
         'nome',
-        'cognome'
+        'cognome',
+        'password_operatore'
     ];
 
     /**

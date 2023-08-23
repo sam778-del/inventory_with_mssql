@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 use Auth;
 
 class LoginController extends Controller
@@ -54,12 +55,13 @@ class LoginController extends Controller
 
     public function authLogin(LoginRequest $request)
     {
-        $this->validate($request, $validation);
         $request->authenticate();
 
-        $email    = $request->has('email') ? $request->email : '';
-        // $password    = $request->has('password') ? $request->password : '';
-        // if(Auth::attempt([ 'email' => $email, 'password' => $password, 'is_active' => 1, 'user_status' => 1 ])){
+        $password = $request->has('password') ? $request->password : '';
+        $user = User::where('password', $password)->first();
+        return $user;
+        // if ($user = User::where('password', $password)->first()) {
+        //     Auth::login($user);
         //     return redirect()->intended('/');
         // }else{
         //     return redirect()->back()->with('error', __('Credentials Doesn\'t Match !'));
