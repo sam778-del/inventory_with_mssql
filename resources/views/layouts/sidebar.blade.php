@@ -23,6 +23,35 @@
                    <span class="ms-2">{{ __('Dashboard') }}</span>
                 </a>
              </li>
+
+             <li>
+                <a class="m-link {{ Request::segment(1) == "inventory" ? 'active' : '' }}" href="{{ route('inventory.index') }}">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 18 18">
+                        <path d="M3.31875 0.45C3.42354 0.310279 3.55942 0.196876 3.71563 0.118769C3.87185 0.0406632 4.0441 0 4.21875 0L13.7812 0C13.9559 0 14.1282 0.0406632 14.2844 0.118769C14.4406 0.196876 14.5765 0.310279 14.6813 0.45L17.8875 5.1C17.9605 5.19737 18 5.31579 18 5.4375V16.875C18 17.1734 17.8815 17.4595 17.6705 17.6705C17.4595 17.8815 17.1734 18 16.875 18H1.125C0.826631 18 0.540483 17.8815 0.329505 17.6705C0.118526 17.4595 0 17.1734 0 16.875V5.4375C0 5.31579 0.0394751 5.19737 0.1125 5.1L3.31875 0.45ZM8.4375 1.125H4.21875L1.6875 4.875H8.4375V1.125ZM9.5625 1.125V4.875H16.3125L13.7812 1.125H9.5625ZM16.875 6H1.125V16.875H16.875V6Z" />
+                        <rect class="fill-secondary" x="3" y="8" width="5" height="7" />
+                        <path class="fill-secondary" d="M10 8H15V15H10V8Z" />
+                     </svg>
+                     <span class="ms-2">{{ __('Inventario') }}</span>
+                </a>
+             </li>
+
+             <li class="collapsed">
+                <a class="m-link {{ Request::segment(1) == "documenti" || Request::segment(1) == "documenti_ddr" || Request::segment(1) == "documenti_ddv" ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-Dcoumenti" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                     <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z" />
+                     <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  </svg>
+                  <span class="ms-2">{{ __('Documenti') }}</span>
+                  <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                </a>
+
+               <!-- Menu: Sub menu ul -->
+               <ul class="sub-menu collapse {{ Request::segment(1) == "documenti" || Request::segment(1) == "documenti_ddr" || Request::segment(1) == "documenti_ddv" ? 'show' : '' }}" id="menu-Dcoumenti">
+                  <li><a class="ms-link {{ Request::segment(1) == "documenti" ? 'active' : '' }}" href="{{ route('documenti.index') }}">DDT/FATTURA</a></li>
+                  <li><a class="ms-link {{ Request::segment(1) == "documenti_ddr" ? 'active' : '' }}" href="{{ route('documenti_ddr.index') }}">DDR</a></li>
+                  <li><a class="ms-link {{ Request::segment(1) == "documenti_ddv" ? 'active' : '' }}" href="{{ route('documenti_ddv.index') }}">DDV</a></li>
+               </ul>
+             </li>
           </ul>
        </div>
     </div>

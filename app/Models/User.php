@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     protected $table = 'dbo.Dipendenti';
 
-    protected $primaryKey = 'pdv_riferimento';
+    protected $primaryKey = 'password_operatore';
 
     public $incrementing = false;
 
@@ -54,11 +54,11 @@ class User extends Authenticatable
 
     public function getUserName()
     {
-        return 'Adeshina';
+        return ucfirst($this->nome.' '.$this->cognome);
     }
 
     public function getUserProfile()
     {
-        return 'logo/avatar.jpg';
+        return 'avatar/avatar.jpg';
     }
 }

@@ -45,7 +45,7 @@ class LoginController extends Controller
         //     header('location:install');
         //     die;
         // }
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest')->except('logout');
     }
 
     public function __invoke()
@@ -56,7 +56,7 @@ class LoginController extends Controller
     public function authLogin(LoginRequest $request)
     {
         $password = $request->has('password') ? $request->password : '';
-        if ($user = User::where('password_operatore', $password)->first()) {
+        if ($user = User::where('password_operatore', $password)->where('livello', 1)->first()) {
             Auth::login($user);
             return redirect()->intended('/');
         }else{
@@ -66,7 +66,7 @@ class LoginController extends Controller
 
     public function authLogout(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');

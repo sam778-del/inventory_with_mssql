@@ -17,7 +17,9 @@
    </head>
    <body class="layout-1" data-luno="theme-blue">
       <!-- start: sidebar -->
+      @if(Request::segment(1) != "lista")
         @include('layouts.sidebar')
+      @endif
       <!-- start: body area -->
       <div class="wrapper">
          <!-- start: page header -->

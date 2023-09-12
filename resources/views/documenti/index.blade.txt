@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@section('page-title', __('Documenti') )
+
+@section('page-content')
+<div class="row g-3 row-deck">
+    <div class="col-12 justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h4><a href="{{ route("inventory.index") }}" class="fa fa-arrow-circle-left me-2" title="Shop Code: {{ Auth::user()->pdv_riferimento }}"></a>ENTARA</h4>
+                <div class="dropdown morphing scale-left">
+                    <a href="javascript:void(0);" class="card-fullscreen" data-bs-toggle="tooltip" title="{{ __("Full Screen") }}"><i class="icon-size-fullscreen"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="d-flex justify-content-center">
+                        <div class="col-sm-8 mb-3">
+                            {!! Form::open(["route" => ["fatura.search"], "method" => "GET", "id" => "submit-search"]) !!}
+                                <label class="form-label">Partita Iva</label>
+                                <div class="input-group">
+                                    <input type="number" name="partita_iva" value="{{ isset($_GET['partita_iva']) ? $_GET['partita_iva'] : '' }}" class="form-control form-control-lg" >
+                                    <button id="form-submit" class="btn btn-lg bg-secondary text-light text-uppercase" type="button">{{ __('SEARCH') }}</button>
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+
+                    @if(isset($result))
+                        @forelse($result as $key => $fornitor)
+                            <div class="col-sm-9 card">
+                                <table class="table align-middle mb-0 card-table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th col="2"></th>
+                                            <th class="text-center">COD FORNITORE</th>
+                                            <th class="text-center">DIFFERENZIATORE</th>
+                                            <th class="text-center">RAGIONE SOCIALE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <a href="" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i></a>
+                                            </td>
+                                            <td  class="text-center">{{ $fornitor->cod_fornitore }}</td>
+                                            <td  class="text-center">{{ $fornitor->differenziatore_fornit_ }}</td>
+                                            <td  class="text-center">{{ $fornitor->ragione_sociale_forn_ }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @empty
+                            <div class="col-sm-12">
+                                <h4 class="text-center text-danger">{{ __('nessun risultato trovato') }}</h4>
+                            </div>
+                        @endforelse
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#form-submit').on('click', function() {
+            $(this).prop("disabled", true);
+            $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+            $('#submit-search').submit();
+        });
+    });
+</script>
+@endpush
